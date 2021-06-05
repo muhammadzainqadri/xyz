@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Random_Numbers"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Generate Random Numbers"
+        android:textColor="#ff7aff24"
+        android:textSize="25dp" />
+
+    <EditText
+        android:id="@+id/et_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview1"
+        android:layout_marginTop="19dp"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Minimum"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textColorHint="#C39696" />
+
+    <EditText
+        android:id="@+id/et_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_min"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Maximum"
+        android:inputType="number"
+        android:textColor="@color/white"
+        android:textColorHint="#C39696" />
+
+    <Button
+        android:id="@+id/btn_generate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_max"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="GENERATE"
+        app:backgroundTint="#F44336" />
+
+    <TextView
+        android:id="@+id/tv_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_generate"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/aldrich"
+        android:hint=""
+        android:layout_centerInParent="true"
+        android:text=""
+        android:textColor="@color/white"
+        android:textColorHint="#C39696"
+        android:textSize="40dp" />
+
+
+</RelativeLayout>
