@@ -3,6 +3,8 @@
     package="com.example.android_test27_april_2021">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -11,19 +13,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Test27April2021">
-        <activity android:name=".Random_Numbers"></activity>
-        <activity android:name=".Web_View" />
-        <activity android:name=".Rating_Bar" />
-        <activity android:name=".Video_View" />
-        <activity android:name=".Date_Picker" />
-        <activity android:name=".Seek_Bar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Alarm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Email">
+
+        </activity>
+        <activity android:name=".Message"></activity>
+        <activity android:name=".Call" />
+        <activity android:name=".Random_Numbers" />
+        <activity android:name=".Web_View" />
+        <activity android:name=".Rating_Bar" />
+        <activity android:name=".Video_View" />
+        <activity android:name=".Date_Picker" />
+        <activity android:name=".Seek_Bar" />
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
