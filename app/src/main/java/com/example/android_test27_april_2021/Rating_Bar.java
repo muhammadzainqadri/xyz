@@ -42,7 +42,8 @@ public class Rating_Bar extends AppCompatActivity {
                 if (kuchbhi == true)
                 {
                     int reqCode = 1;
-                    showNotification(Rating_Bar.this, "Muhammad Zain Qadri", "The data has been inserted to the database", reqCode);                }
+                    showNotification(Rating_Bar.this, "Muhammad Zain Qadri", "The data has been inserted to the database", reqCode);
+                }
 
                 else
                 {
