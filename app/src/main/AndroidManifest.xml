@@ -13,12 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Test27April2021">
-        <activity android:name=".Alarm">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".Alarm">
+
         </activity>
         <activity android:name=".Email">
 
@@ -31,15 +28,19 @@
         <activity android:name=".Video_View" />
         <activity android:name=".Date_Picker" />
         <activity android:name=".Seek_Bar" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <receiver android:name="com.example.android_test27_april_2021.AlertReceiver"/>
-
-
 
     </application>
 

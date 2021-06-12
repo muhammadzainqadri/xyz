@@ -91,13 +91,11 @@ public class Alarm extends AppCompatActivity implements TimePickerDialog.OnTimeS
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
-
-
     private void cancelAlarm() {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
         alarmManager.cancel(pendingIntent);
-            mTextView.setText("Alarm Cancelled");
+        mTextView.setText("Alarm Cancelled");
     }
 }

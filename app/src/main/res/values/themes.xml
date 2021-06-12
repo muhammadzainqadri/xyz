@@ -16,5 +16,21 @@
 
     </style>
 
+    <style name="customToast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#000000</item>
+        <item name="stFont">@font/aldrich</item>
+        <item name="stTextSize">30sp</item>
+        <item name="stColorBackground">#F44336</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">#FA5D52</item>
+        <item name="stIconStart">@drawable/ic_baseline_emoji_emotions_24</item>
+        <item name="stIconEnd">@drawable/ic_baseline_emoji_emotions_24</item>
+        <item name="stLength">LONG</item> LONG or SHORT
+        <item name="stGravity">center</item> top or center
+        <item name="stRadius">5dp</item>
+    </style>
+
 
 </resources>

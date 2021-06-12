@@ -3,9 +3,13 @@ package com.example.android_test27_april_2021;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,49 +17,62 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.muddzdev.styleabletoast.StyleableToast;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // hides nav bar
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        //hides status bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //hides app name in action bar
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        RelativeLayout snackBar = (RelativeLayout) findViewById(R.id.snackBar);
+//        customToast();
+
         RelativeLayout seekBar = (RelativeLayout) findViewById(R.id.seekBar);
-        RelativeLayout datePicker = (RelativeLayout) findViewById(R.id.datePicker);
         RelativeLayout landscape = (RelativeLayout) findViewById(R.id.landscape);
         RelativeLayout videoView = (RelativeLayout) findViewById(R.id.videoView);
-        RelativeLayout customToast = (RelativeLayout) findViewById(R.id.customToast);
         RelativeLayout webView = (RelativeLayout) findViewById(R.id.webView);
         RelativeLayout ratingBar = (RelativeLayout) findViewById(R.id.ratingBar);
         RelativeLayout randNum = (RelativeLayout) findViewById(R.id.randNum);
 
-        snackBar.setOnClickListener(new View.OnClickListener() {
+        ImageView image_date = (ImageView) findViewById(R.id.image_date);
+
+        image_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar snackbar = Snackbar
-                        .make(v, "Are you a genius?", Snackbar.LENGTH_LONG)
-                        .setAction("YES", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Snackbar snackbar1 = Snackbar.make(v, "Shakal Dekh Apni", Snackbar.LENGTH_SHORT);
-                                snackbar1.show();
-                            }
-                        });
-                snackbar.show();
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
 
@@ -64,14 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Seek_Bar.class);
                 startActivity(intent);
-            }
-        });
-
-        datePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Date_Picker.class);
-                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_bottom, R.anim.slide_in_bottom);
             }
         });
 
@@ -106,13 +116,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        customToast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showToast();
-            }
-        });
-
         webView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void customToast() {
+        StyleableToast.makeText(this, "Hello World", R.style.customToast).show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -156,18 +163,27 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void showToast() {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout, (ViewGroup) findViewById(R.id.toast_root));
-        TextView toastText = layout.findViewById(R.id.toast_text);
-        ImageView toastImage = layout.findViewById(R.id.toast_image);
-        toastText.setText("YEH HAI BEHTAREEN WAALA CUSTOM TOAST");
-        toastImage.setImageResource(R.drawable.happy_crying_meme);
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        TextView textView = (TextView) findViewById(R.id.tv_date);
+        textView.setText(currentDateString);
+
+        Snackbar snackbar = Snackbar
+                .make(getWindow().getDecorView().getRootView(), "Date has been set", Snackbar.LENGTH_LONG)
+                .setAction("RESET", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TextView textView = (TextView) findViewById(R.id.tv_date);
+                        textView.setText("");
+                        Snackbar snackbar1 = Snackbar.make(getWindow().getDecorView().getRootView(), "Date has been successfully reset", Snackbar.LENGTH_SHORT);
+                        snackbar1.show();
+                    }
+                });
+        snackbar.show();
     }
 
 }
